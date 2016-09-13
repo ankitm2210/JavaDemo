@@ -12,6 +12,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import service.CartService;
+import serviceImpl.CartServiceMockImpl;
 
 /**
  *
@@ -34,7 +36,11 @@ public class DemoController {
    public String addStudent(@ModelAttribute("userForm")Customer customer, 
    Model model) {
       model.addAttribute("name", customer.getEmail());
+      String billNumber = "1122AA";
+      CartService service = new CartServiceMockImpl();
+      model.addAttribute("cart",service.getCartInfo());
       model.addAttribute("password", customer.getPassword()); 
+      model.addAttribute("billNumber", billNumber);
       System.out.print(customer.getEmail());
       return "customer-details";
    }

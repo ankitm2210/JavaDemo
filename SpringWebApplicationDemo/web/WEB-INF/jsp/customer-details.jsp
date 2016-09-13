@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-xs-12">
     		<div class="invoice-title">
-    			<h2>Invoice</h2><h3 class="pull-right">Order # 12345</h3>
+                    <h2>Invoice</h2><h3 class="pull-right">Order # ${billNumber}</h3>
     		</div>
     		<hr>
     		<div class="row">
@@ -83,41 +83,31 @@
     						</thead>
     						<tbody>
     							<!-- foreach ($order->lineItems as $line) or some such thing here -->
-    							<tr>
-    								<td>BS-200</td>
-    								<td class="text-center">$10.99</td>
-    								<td class="text-center">1</td>
-    								<td class="text-right">$10.99</td>
+                                                        <c:forEach items="${cart.items}" var="element"> 
+                                                        <tr>
+                                                            <td>${element.itemId}</td>
+                                                            <td class="text-center">${element.price}</td>
+                                                            <td class="text-center">${element.quantity}</td>
+                                                            <td class="text-right">${element.quantity * element.price}</td>
     							</tr>
-                                <tr>
-        							<td>BS-400</td>
-    								<td class="text-center">$20.00</td>
-    								<td class="text-center">3</td>
-    								<td class="text-right">$60.00</td>
-    							</tr>
-                                <tr>
-            						<td>BS-1000</td>
-    								<td class="text-center">$600.00</td>
-    								<td class="text-center">1</td>
-    								<td class="text-right">$600.00</td>
-    							</tr>
-    							<tr>
+                                                        </c:forEach>
+                                			<tr>
     								<td class="thick-line"></td>
     								<td class="thick-line"></td>
     								<td class="thick-line text-center"><strong>Subtotal</strong></td>
-    								<td class="thick-line text-right">$670.99</td>
+                                                                <td class="thick-line text-right">${cart.subTotal}</td>
     							</tr>
     							<tr>
     								<td class="no-line"></td>
     								<td class="no-line"></td>
     								<td class="no-line text-center"><strong>Shipping</strong></td>
-    								<td class="no-line text-right">$15</td>
+                                                                <td class="no-line text-right">${cart.shipping}</td>
     							</tr>
     							<tr>
     								<td class="no-line"></td>
     								<td class="no-line"></td>
     								<td class="no-line text-center"><strong>Total</strong></td>
-    								<td class="no-line text-right">$685.99</td>
+                                                                <td class="no-line text-right">${cart.total}</td>
     							</tr>
     						</tbody>
     					</table>
